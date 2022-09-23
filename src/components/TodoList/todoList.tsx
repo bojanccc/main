@@ -1,4 +1,5 @@
 import React from "react";
+import './todoList.scss';
 
 type TodoListProps = {
   todos: any[];
