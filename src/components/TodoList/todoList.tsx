@@ -5,7 +5,7 @@ import CheckIcon from '../../Assets/Icons/check.svg';
 import CheckSuccessIcon from '../../Assets/Icons/checkSuccess.svg';
 import DeleteIcon from '../../Assets/Icons/delete.svg';
 import { useSelector, useDispatch } from 'react-redux';
-import { markItemChecked, removeItemFromList } from '../../redux/todoListSlice';
+import { handleItemCheck, removeItemFromList } from '../../redux/todoListSlice';
 
 interface ListItem {
   text: string;
@@ -20,7 +20,7 @@ export const TodoList = () => {
 
 
   const markChecked = (item: ListItem) => {
-    dispatch(markItemChecked(item))
+    dispatch(handleItemCheck(item))
   }
 
   const deleteItem = (item: ListItem) => {

@@ -1,5 +1,9 @@
 import { createSlice, current, PayloadAction } from '@reduxjs/toolkit';
 
+interface List {
+    text: string;
+    done: boolean;
+}
 
 export const todoListSlice = createSlice({
     name: 'list',
@@ -11,12 +15,13 @@ export const todoListSlice = createSlice({
     },
     reducers: {
 
-        markItemChecked: (state, action: PayloadAction<object>) => {
+        handleItemCheck: (state, action: PayloadAction<List>) => {
             const tempData = state.data;
             
-            console.log(action.payload)
-
-
+            console.log(action.payload.text)
+            const index = tempData.map(e => e.text).indexOf(action.payload.text);
+            console.log(index)
+            tempData[index].done = !action.payload.done
             state.data = tempData;
         },
 
@@ -39,7 +44,7 @@ export const todoListSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const {
-    addItemToList, removeItemFromList, markItemChecked
+    addItemToList, removeItemFromList, handleItemCheck
 } = todoListSlice.actions;
 
 export default todoListSlice.reducer;
