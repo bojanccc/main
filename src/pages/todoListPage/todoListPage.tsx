@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './todoListPage.scss';
 import { TodoList } from "../../components/TodoList/todoList";
 import { useSelector, useDispatch } from 'react-redux'
-import { addItem } from "../../redux/todoListSlice";
+import { addItemToList } from "../../redux/todoListSlice";
 
 
 
@@ -12,7 +12,7 @@ export default function TodoListPage() {
 
 
     const additem = () => {
-        dispatch(addItem(newItem))
+        dispatch(addItemToList(newItem))
         setNewItem('')
     }
 

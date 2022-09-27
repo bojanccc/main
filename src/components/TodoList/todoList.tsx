@@ -3,7 +3,9 @@ import './todoList.scss';
 
 import CheckIcon from '../../Assets/Icons/check.svg';
 import CheckSuccessIcon from '../../Assets/Icons/checkSuccess.svg';
-import { useSelector, useDispatch } from 'react-redux'
+import DeleteIcon from '../../Assets/Icons/delete.svg';
+import { useSelector, useDispatch } from 'react-redux';
+import { markItemChecked, removeItemFromList } from '../../redux/todoListSlice';
 
 interface ListItem {
   text: string;
@@ -13,13 +15,16 @@ interface ListItem {
 
 
 export const TodoList = () => {
+  const dispatch = useDispatch()
   const list = useSelector((state: any) => state.list.data)
 
-  console.log('redux',list)
 
   const markChecked = (item: ListItem) => {
-    
-  
+    dispatch(markItemChecked(item))
+  }
+
+  const deleteItem = (item: ListItem) => {
+    dispatch(removeItemFromList(item.text))
   }
 
 
@@ -29,11 +34,14 @@ export const TodoList = () => {
     <ul className="todoList">
       {list.map((item: ListItem, i: React.Key | null | undefined) => (
         <li key={i}>
-          {item.done ?
-            <img onClick={()=>markChecked(item)} src={CheckSuccessIcon} />
-            : <img onClick={() => markChecked(item)} src={CheckIcon} />
-          }
-          <span data-testid={`todo${i}`}>{item.text}</span>
+          <div>
+            {item.done ?
+              <img onClick={() => markChecked(item)} src={CheckSuccessIcon} />
+              : <img onClick={() => markChecked(item)} src={CheckIcon} />
+            }
+            <span data-testid={`todo${i}`}>{item.text}</span>
+          </div>
+          <img onClick={() => deleteItem(item)} src={DeleteIcon} />
         </li>
       ))}
     </ul>
