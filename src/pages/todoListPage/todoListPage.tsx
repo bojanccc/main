@@ -8,22 +8,24 @@ import { addItemToList } from "../../redux/todoListSlice";
 
 export default function TodoListPage() {
     const dispatch = useDispatch()
-    const [newItem, setNewItem] = useState('')
+    const [newItem, setItemName] = useState('')
 
 
     const additem = () => {
         dispatch(addItemToList(newItem))
-        setNewItem('')
+        setItemName('')
     }
 
     const onNameInput = (event: any) => {
-        setNewItem(event.target.value)
+        setItemName(event.target.value)
     }
 
     return (
         <div className="pageWrapper">
-            <input type="text" onChange={(e) => onNameInput(e)} id="itemName" value={newItem} ></input>
-            <button onClick={additem}  >Add item</button>
+            <div className="inputContainer" >
+                <input type="text" onChange={(e) => onNameInput(e)} id="itemName" value={newItem} ></input>
+                <button onClick={additem}  >Add item</button>
+            </div>
             <TodoList />
         </div>
     );
