@@ -1,15 +1,12 @@
 import React, { useState } from "react";
-import './todoListPage.scss';
 import { TodoList } from "../../components/TodoList/todoList";
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { addItemToList } from "../../redux/todoListSlice";
-
-
+import './todoListPage.scss';
 
 export default function TodoListPage() {
     const dispatch = useDispatch()
     const [newItem, setItemName] = useState('')
-
 
     const additem = () => {
         dispatch(addItemToList(newItem))
@@ -24,7 +21,7 @@ export default function TodoListPage() {
         <div className="pageWrapper">
             <div className="inputContainer" >
                 <input type="text" onChange={(e) => onNameInput(e)} id="itemName" value={newItem} ></input>
-                <button onClick={additem}  >Add item</button>
+                <button disabled={newItem!==''? false : true} onClick={additem}>Add item</button>
             </div>
             <TodoList />
         </div>
