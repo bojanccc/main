@@ -41,16 +41,16 @@ export const TodoList = () => {
       <ul className="todoList">
         {list.map((item: ListItem, i: React.Key | null | undefined) => (
           <li key={i}>
-            <div className="nameContainer">
+            <div className="nameContainer" data-testid={`nameContainer${i}`}>
               {item.done ?
-                <img alt='Checked icon' onClick={() => markChecked(item)} src={CheckSuccessIcon} />
-                : <img alt='Unchecked icon' onClick={() => markChecked(item)} src={CheckIcon} />
+                <img data-testid={`checkedIcon${i}`} alt='Checked icon' onClick={() => markChecked(item)} src={CheckSuccessIcon} />
+                : <img data-testid={`uncheckedIcon${i}`} alt='Unchecked icon' onClick={() => markChecked(item)} src={CheckIcon} />
               }
-              <span data-testid={`todo${i}`}>{item.text}</span>
+              <span data-testid={`itemName${i}`}>{item.text}</span>
             </div>
             <div className="buttonsContainer">
-              <img alt='Edit icon' onClick={() => editItem(item)} src={EditIcon} />
-              <img alt='Delete icon' onClick={() => deleteItem(item)} src={DeleteIcon} />
+              <img data-testid={`editIcon${i}`} alt='Edit icon' onClick={() => editItem(item)} src={EditIcon} />
+              <img data-testid={`deleteIcon${i}`} alt='Delete icon' onClick={() => deleteItem(item)} src={DeleteIcon} />
             </div>
           </li>
         ))}
