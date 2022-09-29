@@ -1,21 +1,30 @@
 import App from "../App";
-import { fireEvent, render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
+import { TodoList } from '../components/TodoList/todoList';
+import React from "react";
+import { Provider } from 'react-redux'
+import { store } from '../redux/store'
 
-describe("TodoApp", () => {
+describe('Todo App', () => {
+
   it("renders app", () => {
-    const app = render(<App />);
+    const app = render(<Provider store={store}><App /></Provider>);
     expect(app).not.toBeUndefined();
   });
 
   it("renders initial items", () => {
-    render(<App />);
+    render(<Provider store={store}><TodoList /></Provider>)
 
     expect(screen.getByText("Buy milk")).toBeDefined();
-    const buyMilkTodo = screen.getByTestId("toggle0");
-    expect(buyMilkTodo).toBeChecked();
+    expect(screen.getByTestId('checkedIcon0')).toBeInTheDocument();
+    expect(screen.getByTestId('editIcon0')).toBeInTheDocument();
+    expect(screen.getByTestId('deleteIcon0')).toBeInTheDocument();
 
-    //TODO: Verify second todo
+    expect(screen.getByText("Buy bread")).toBeDefined();
+    expect(screen.getByTestId('uncheckedIcon1')).toBeInTheDocument();
+    expect(screen.getByTestId('editIcon1')).toBeInTheDocument();
+    expect(screen.getByTestId('deleteIcon1')).toBeInTheDocument();
+
   });
 });
